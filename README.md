@@ -10,7 +10,7 @@ This library is very rough and doesn't do much to cover up ANTLR-generated files
 
 Here's a little example:
 
-```
+```clojure
 ;; Make all string literals uppercase:
 (defn uppercase-all-strings
   [file-path]
