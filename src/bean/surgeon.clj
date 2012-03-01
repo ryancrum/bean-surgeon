@@ -32,12 +32,12 @@
   (loop [changed-lines {}
          remaining tokens]
           (if (seq remaining)
-            (let [string-literal (first remaining)
-                  start (.getCharPositionInLine string-literal)
-                  token-size (count (.getText string-literal))
+            (let [token (first remaining)
+                  start (.getCharPositionInLine token)
+                  token-size (count (.getText token))
                   stop (+ start
                           token-size)
-                  line-number (.getLine string-literal)
+                  line-number (.getLine token)
                   charoffset (or
                               (:charoffset (get changed-lines line-number))
                               0)
@@ -46,7 +46,7 @@
                              (nth lines (- line-number 1)))
                   beginning (.substring line-text 0 (+ charoffset start))
                   end (.substring line-text (+ charoffset stop))
-                  new-value (f string-literal)
+                  new-value (f token)
                   modified (str beginning new-value end)]
               (recur
                (merge changed-lines {line-number
