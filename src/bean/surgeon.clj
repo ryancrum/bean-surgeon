@@ -65,7 +65,6 @@
                lines
                f)]
     (loop [changeset (create-changeset lines)
-           offset 0
            remaining-line-numbers (sort (keys delta))]
       (if (seq remaining-line-numbers)
         (let [line-number (first remaining-line-numbers)
@@ -74,7 +73,6 @@
            (change-line changeset
                         (:modified line-change)
                         line-number)
-           (inc offset)
            (rest remaining-line-numbers)))
         changeset))))
 
